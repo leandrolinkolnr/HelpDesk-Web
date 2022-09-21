@@ -1,13 +1,13 @@
-package com.leandro.helpdesk.demo.domain;
+package com.leandro.helpdesk.demo.domain.enums;
 
-public enum Status {
+public enum Prioridade {
     
-    ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO");
+    BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
 
     private Integer codigo;
     private String descrição;
 
-    private Status(Integer codigo, String descricao){
+    private Prioridade(Integer codigo, String descricao){
         this.codigo = codigo;
         this.descrição = descricao;
     }
@@ -27,6 +27,6 @@ public enum Status {
             if(cod.equals(x.getCodigo())) return x;
         }
 
-        throw new IllegalArgumentException("Status Invalido"); 
+        throw new IllegalArgumentException("Prioridade Invalida"); 
     }
 }

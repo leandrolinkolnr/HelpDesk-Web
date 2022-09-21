@@ -1,4 +1,4 @@
-package com.leandro.helpdesk.demo.domain;
+package com.leandro.helpdesk.demo.domain.enums;
 
 public enum Perfil {
     
