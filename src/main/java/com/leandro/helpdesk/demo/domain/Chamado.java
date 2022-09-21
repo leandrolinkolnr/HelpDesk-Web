@@ -1,22 +1,44 @@
 package com.leandro.helpdesk.demo.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.leandro.helpdesk.demo.domain.enums.Prioridade;
 import com.leandro.helpdesk.demo.domain.enums.Status;
 
+// Avisando ao JPA que pessoa é uma entedidade, queo criar um tabela no bd
+@Entity
+public class Chamado implements Serializable {
 
-public class Chamado {
+    private static final long serialVersionUID = 1L;
     
+    @Id     // informando que é uma chave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy") // Quero receber no padrao brasil
     private LocalDate dataAbertura = LocalDate.now();
+    @JsonFormat(pattern = "dd/MM/yyyy") // Quero receber no padrao brasil
     private LocalDate dataFechamento;
     private Prioridade prioridade; 
     private Status status;
     private String titulo;
     private String observacoes;
 
+    @ManyToOne  // Muitos pra um , tecnico tem muitos chamados
+    @JoinColumn(name = "tecnico_id")
     private Tecnico tecnico;
+
+    @ManyToOne  // Muitos pra um 
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico,

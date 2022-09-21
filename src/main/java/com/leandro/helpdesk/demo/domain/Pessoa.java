@@ -1,20 +1,46 @@
 package com.leandro.helpdesk.demo.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.leandro.helpdesk.demo.domain.enums.Perfil;
 
-public abstract class Pessoa {
+// Avisando ao JPA que pessoa é uma entedidade, queo criar um tabela no bd
+@Entity 
+public abstract class Pessoa implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    @Id     // informando que é uma chave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
     protected String nome;
+
+    @Column(unique = true)
+
     protected String cpf;
     protected String email;
     protected String senha;
+
+    // Assegurando que venha com usuario ???
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "Perfis")
     protected Set<Integer> perfis = new HashSet<>();
+
+    @JsonFormat(pattern = "dd/MM/yyyy") // Quero receber no padrao brasil
     protected LocalDate dataCriacao = LocalDate.now();
 
     public Pessoa() {
