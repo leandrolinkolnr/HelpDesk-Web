@@ -14,7 +14,7 @@ public class TestConfig {
     @Autowired
     private DBService dbService;
 
-    @Bean   // de forma automatica vai chamar o metodo quando o perfil teste estiver ativo
+    @Bean   // de forma automatica vai chamar o metodo quando o perfil teste estiver ativo  
     public void instaciaDB(){
         this.dbService.instanciaDB();   // metodo da classe DBService
     } 
