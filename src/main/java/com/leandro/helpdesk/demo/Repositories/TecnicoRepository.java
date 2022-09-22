@@ -1,4 +1,4 @@
-package com.leandro.helpdesk.demo.domain.Repositories;
+package com.leandro.helpdesk.demo.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
