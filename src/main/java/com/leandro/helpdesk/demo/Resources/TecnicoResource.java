@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.leandro.helpdesk.demo.Services.TecnicoService;
 import com.leandro.helpdesk.demo.domain.Tecnico;
+import com.leandro.helpdesk.demo.domain.dtos.TecnicoDto;
 
 @RestController  // controlador Rest
 @RequestMapping(value="/tecnicos")          // qual o caminho p/ tecnicos
@@ -19,9 +20,11 @@ public class TecnicoResource {
 
     // Quando passar /tecnicos/1 é pra buscar pelo ID 1
     @GetMapping(value="/{id}")
-    public ResponseEntity<Tecnico> findById(@PathVariable Integer id){
+    public ResponseEntity<TecnicoDto> findById(@PathVariable Integer id){
              Tecnico obj = service.findById(id);
-             return ResponseEntity.ok().body(obj);
+
+             // vai construir o dto passando o obj que é do tipo tecnico
+             return ResponseEntity.ok().body(new TecnicoDto(obj));
         
     }
 }
