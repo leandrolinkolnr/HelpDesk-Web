@@ -33,6 +33,10 @@ public class DBService {
         Tecnico tec1 = new Tecnico(null, "Valdir Costa", "760.457.770-93", "valdir@mail.com", "123");
 		tec1.addPerfil(Perfil.ADMIN);  // Adicionar esse perfil como adm
 
+		// nao ta incluindo tec2
+		Tecnico tec2 = new Tecnico(null, "Leandro", "840.451.750-14", "leo@mail.com", "1313");
+		tec2.addPerfil(Perfil.TECNICO);
+
 		Cliente cli1 = new Cliente(null, "Linus Tovalders", "10768103654", "linus@mail.com", "1234");
 		//cli1.addPerfil(Perfil.CLIENTE);
 
@@ -41,6 +45,7 @@ public class DBService {
 		// Pra salvar no banco de dados
 		// o Array as list vai criar uma lista com o que tem nos parametros
 		tecnicoRepository.saveAll(Arrays.asList(tec1));
+		tecnicoRepository.saveAll(Arrays.asList(tec2));
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		chamadoRepository.saveAll(Arrays.asList(c1));
     }

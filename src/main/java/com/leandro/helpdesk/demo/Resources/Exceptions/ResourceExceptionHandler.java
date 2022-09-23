@@ -1,10 +1,7 @@
 package com.leandro.helpdesk.demo.Resources.Exceptions;
 
-import java.time.LocalDateTime;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.type.LocalDateTimeType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
