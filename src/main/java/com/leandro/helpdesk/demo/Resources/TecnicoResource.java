@@ -1,5 +1,6 @@
 package com.leandro.helpdesk.demo.Resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.leandro.helpdesk.demo.Services.TecnicoService;
 import com.leandro.helpdesk.demo.domain.Tecnico;
@@ -40,4 +44,14 @@ public class TecnicoResource {
         List<TecnicoDto> listDto = list.stream().map(obj -> new TecnicoDto(obj)).collect(Collectors.toList());
         return  ResponseEntity.ok().body(listDto);
     }
+
+    @PostMapping
+    // Para criar, ele precisa receber os parametros de um tecnico
+    public ResponseEntity<TecnicoDto> create(@RequestBody TecnicoDto objDto){
+        Tecnico newObj = service.create(objDto);     // cria um metodo create no tecnicoService
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
+        buildAndExpand(newObj.getId()).toUri();     // retornar 
+        return ResponseEntity.created(uri).build();
+    }
+
 }
