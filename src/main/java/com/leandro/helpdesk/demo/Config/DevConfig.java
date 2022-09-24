@@ -25,8 +25,7 @@ public class DevConfig {
         if(value.equals("create")){         // Se tiver create, ele pede pra criar as tabelas
             this.dbService.instanciaDB();   // metodo da classe DBService
         }
-        return false;
-        
+        return false; 
     } 
     
 }
