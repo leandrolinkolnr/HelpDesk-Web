@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,7 @@ import com.leandro.helpdesk.demo.Services.TecnicoService;
 import com.leandro.helpdesk.demo.domain.Tecnico;
 import com.leandro.helpdesk.demo.domain.dtos.TecnicoDto;
 
-@RestController  // controlador Rest
+@RestController  // controlador Rest - Onde recebe as requisições
 @RequestMapping(value="/tecnicos")          // qual o caminho p/ tecnicos
 public class TecnicoResource {
     
@@ -47,7 +49,7 @@ public class TecnicoResource {
 
     @PostMapping
     // Para criar, ele precisa receber os parametros de um tecnico
-    public ResponseEntity<TecnicoDto> create(@RequestBody TecnicoDto objDto){
+    public ResponseEntity<TecnicoDto> create(@Valid @RequestBody TecnicoDto objDto){
         Tecnico newObj = service.create(objDto);     // cria um metodo create no tecnicoService
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
         buildAndExpand(newObj.getId()).toUri();     // retornar 
